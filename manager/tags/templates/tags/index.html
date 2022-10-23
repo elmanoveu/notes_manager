@@ -22,7 +22,21 @@
             {% endfor %} <br><br>
             <input type="checkbox" class="checked" name="favourite" value=True>
                 <span>Только с пометкой "Избранное"</span><br><br>
-            <button type="submit">Применить фильтр</button>
+            <button type="submit">Применить фильтр</button><br><br>
+            <label for="order_param">Сортировка по:</label>
+            <select name="order_param" id="order_param">
+                <option value="">-- Выберите параметр --</option>
+                <option value="category">Категория</option>
+                <option value="created_date">Дата создания</option>
+                <option value="favourite">Избранное</option>
+            </select>
+            <select name="order_rule" id="order_rule">
+                <option value="">-- Порядок сортировки --</option>
+                <option value="asc">По возрастанию</option>
+                <option value="desc">По убыванию</option>
+            </select>
+</form>
+
         </form><br>
         <a class="add_note" href="{% url 'addnote' %}" target="_blank">Добавить заметку</a><br><br>
         {% for n in notes %}

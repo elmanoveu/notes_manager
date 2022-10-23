@@ -37,7 +37,14 @@ class NoteFilter(NoteHome, ListView):
         for n in list(Note.objects.filter(author=self.request.user)):
             all_headers.append(n.header)
 
-        print(self.request.GET.getlist("created_date")[0])
+        order_param = self.request.GET.getlist("order_param")[0]
+        order_rule = self.request.GET.getlist("order_rule")[0]
+
+        if len(order_param) == 0:  # если не задан параметр сортировки, выставляем сортировку по умолчанию
+            order_result = '-created_date'
+        else:
+            order_result = '-' + order_param if order_rule == 'desc' else order_param
+
         queryset = Note.objects.filter(
             category__in=all_cats if not self.request.GET.getlist("category")
                                   else self.request.GET.getlist("category"),
@@ -49,7 +56,7 @@ class NoteFilter(NoteHome, ListView):
             created_date__gte='1900-01-01' if (not self.request.GET.getlist("created_date")
                                                or len(self.request.GET.getlist("created_date")[0]) == 0)
                                            else self.request.GET.getlist("created_date")[0]
-        ).order_by('-created_date')
+        ).order_by(order_result)
 
         return queryset
 
