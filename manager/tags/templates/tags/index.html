@@ -1,0 +1,14 @@
+{% extends 'tags/base.html' %}
+
+{% block content %}
+<div class="title">
+    <h1>{{title}}</h1>
+</div>
+<div class="notes_list">
+    {% for n in notes %}
+        <a href="{{ n.get_absolute_url }}">{{n.header}}</a>
+        <p>{{n.content}}</p>
+        <hr>
+        {% endfor %}
+</div>
+{% endblock %}

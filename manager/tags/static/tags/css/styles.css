@@ -1,0 +1,45 @@
+{% load static %}
+html, body {
+    font-family: 'Arial';
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    color: #444;
+}
+
+.mainmenu a {
+    background: #F8F8FF;
+    overflow: hidden;
+    color: #444;
+    padding: 14px 40px;
+    float: left;
+    text-align: center;
+    font-size: 17px;
+    text-decoration: none;
+}
+
+.mainmenu a:hover {
+    background: #87CEFA;
+}
+
+.title {
+    padding: 5px;
+    color: #444;
+}
+
+.notes_list a {
+    color: #444;
+    padding: 5px;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.notes_list a:hover {
+    background: #d9d9d9;
+}
+
+.notes_list p {
+    padding: 5px 30px;
+    font-size: 14px;
+}

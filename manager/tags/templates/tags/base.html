@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+    <link type="text/css" href="{% static 'tags/css/styles.css' %}" rel="stylesheet" />
+</head>
+<body>
+{% block mainmenu %}
+<div class="mainmenu">
+  <a href="/"> Заметки </a>
+  <a> Добавить заметку </a>
+  <a href="{% url 'register' %}"> Регистрация</a>
+  <a href="{% url 'login' %}"> Войти </a>
+    <br><br>
+{% endblock mainmenu %}
+</div>
+{% block content %}
+{% endblock %}
+
+</body>
+</html>
