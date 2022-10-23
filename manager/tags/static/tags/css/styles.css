@@ -19,6 +19,10 @@ html, body {
     text-decoration: none;
 }
 
+.mainmenu ul, li {
+    list-style-type: none;
+}
+
 .mainmenu a:hover {
     background: #87CEFA;
 }
@@ -28,10 +32,17 @@ html, body {
     color: #444;
 }
 
-.notes_list a {
+.notes_list a.name {
     color: #444;
     padding: 5px;
     font-size: 20px;
+    text-decoration: none;
+}
+
+.notes_list a.show, a.edit, a.delete, a.add_note {
+    color: #444;
+    padding: 5px;
+    font-size: 10px;
     text-decoration: none;
 }
 

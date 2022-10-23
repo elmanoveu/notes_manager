@@ -5,10 +5,16 @@
     <h1>{{title}}</h1>
 </div>
 <div class="notes_list">
-    {% for n in notes %}
-        <a href="{{ n.get_absolute_url }}">{{n.header}}</a>
-        <p>{{n.content}}</p>
-        <hr>
+    {% if request.user.is_authenticated %}
+        <a class="add_note" href="{% url 'addnote' %}">Добавить заметку</a><br><br>
+        {% for n in notes %}
+            <a class="name">{{n.header}}</a>
+            <a class="show" href="{{ n.get_absolute_url }}">Просмотреть</a>
+            <a class="edit" href="/">Редактировать</a>
+            <a class="delete" href="/">Удалить</a>
+            <p>{{n.content|truncatewords:15}}</p>
+            <hr>
         {% endfor %}
+    {% endif %}
 </div>
 {% endblock %}

@@ -2,13 +2,17 @@ from django.db import models
 from django.urls import reverse
 
 
+all_categories = (('Ссылка', 'Ссылка'), ('Заметка', 'Заметка'), ('Памятка', 'Памятка'), ('TODO', 'TODO'))
+
+
 class Note(models.Model):
     id = models.IntegerField
-    header = models.CharField(max_length=255)
-    content = models.TextField(blank=True)
+    header = models.CharField(max_length=255, verbose_name='Заголовок')
+    content = models.TextField(blank=True, verbose_name='Текст')
     created_date = models.DateTimeField(auto_now_add=True)
-    category = models.CharField(max_length=255)
-    favourite = models.BooleanField(default=False)
+    category = models.CharField(max_length=255, choices=all_categories, verbose_name='Категория')
+    favourite = models.BooleanField(default=False, verbose_name='Избранное')
+    author = models.CharField(max_length=255, default='')
 
     def __str__(self):
         return self.header

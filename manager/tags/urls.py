@@ -2,8 +2,11 @@ from django.urls import path
 from .views import *
 
 urlpatterns = [
-    path('', index),
-    path('note/<int:note_id>/', notes, name='note'),
-    path('login/', login, name='login'),
-    path('register/', register, name='register'),
+    path('', NoteHome.as_view(), name=''),
+    path('note/<int:note_id>/', show_note, name='note'),
+    path('addnote/', add_note, name='addnote'),
+    path('login/', LoginUser.as_view(), name='login'),
+    path('logout/', logout_user, name='logout'),
+    path('register/', RegisterUser.as_view(), name='register'),
+    path('about/', about, name='about'),
 ]
