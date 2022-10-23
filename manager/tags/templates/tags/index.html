@@ -2,15 +2,19 @@
 
 {% block content %}
 <div class="title">
+    {% if request.user.is_authenticated %}
     <h1>{{title}}</h1>
+    {% else %}
+    <h1>Войдите в учетную запись для управления заметками</h1>
+    {% endif %}
 </div>
 <div class="notes_list">
     {% if request.user.is_authenticated %}
-        <a class="add_note" href="{% url 'addnote' %}">Добавить заметку</a><br><br>
+        <a class="add_note" href="{% url 'addnote' %}" target="_blank">Добавить заметку</a><br><br>
         {% for n in notes %}
             <a class="name">{{n.header}}</a>
-            <a class="show" href="{{ n.get_absolute_url }}">Просмотреть</a>
-            <a class="edit" href="/">Редактировать</a>
+            <a class="show" href="{{ n.get_absolute_url }}" target="_blank">Просмотреть</a>
+            <a class="edit" href="{{ n.get_edit_url }}" target="_blank">Редактировать</a>
             <a class="delete" href="/">Удалить</a>
             <p>{{n.content|truncatewords:15}}</p>
             <hr>

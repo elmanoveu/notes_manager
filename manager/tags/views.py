@@ -1,5 +1,5 @@
 from django.contrib.auth import login, logout
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView
 from django.contrib.auth.views import LoginView
@@ -77,7 +77,25 @@ def add_note(request):
                 return form.add_error(None, 'Ошибка добавления заметки')
     else:
         form = AddNoteForm()
-    return render(request, 'tags/addnote.html', {'form': form, 'title': 'Добавление статьи'})
+    return render(request, 'tags/addnote.html', {'form': form, 'title': 'Добавление заметки'})
+
+
+def edit_note(request, note_id):
+    currow = get_object_or_404(Note, id=note_id)
+    if request.method == 'POST':
+        form = AddNoteForm(request.POST, instance=currow)
+        if form.is_valid():
+            try:
+                currow = form.save(commit=False)
+                currow.save()
+                currow.author = request.user
+                return redirect('')
+            except:
+                return form.add_error(None, 'Ошибка редактирования заметки')
+    else:
+        form = AddNoteForm(instance=currow)
+    return render(request, 'tags/editnote.html', {'form': form, 'n': currow, 'title': 'Редактирование заметки'})
+
 
 """
 class AddNote(LoginRequiredMixin, DataMixin, CreateView):

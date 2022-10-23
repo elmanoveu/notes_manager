@@ -20,6 +20,9 @@ class Note(models.Model):
     def get_absolute_url(self):
         return reverse('note', kwargs={'note_id': self.id})
 
+    def get_edit_url(self):
+        return reverse('editnote', kwargs={'note_id': self.id})
+
     class Meta:
         verbose_name = 'Заметки'
         verbose_name_plural = 'Заметки'
