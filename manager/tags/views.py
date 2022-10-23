@@ -20,7 +20,38 @@ class NoteHome(DataMixin, ListView):
         return dict(list(context.items()) + list(c_def.items()))
 
     def get_queryset(self):
-        return Note.objects.filter(author=self.request.user)
+        quer = Note.objects.filter(author=self.request.user).order_by('-created_date')
+        return quer
+
+    def get_categories(self):
+        return Category.objects.all()
+
+
+class NoteFilter(NoteHome, ListView):
+    template_name = 'tags/index.html'
+
+    def get_queryset(self):
+        all_headers = []
+        all_cats = [1, 2, 3, 4]
+        all_favourites = [True, False]
+        for n in list(Note.objects.filter(author=self.request.user)):
+            all_headers.append(n.header)
+
+        print(self.request.GET.getlist("created_date")[0])
+        queryset = Note.objects.filter(
+            category__in=all_cats if not self.request.GET.getlist("category")
+                                  else self.request.GET.getlist("category"),
+            header__in=all_headers if (not self.request.GET.getlist("header")
+                                       or len(self.request.GET.getlist("header")[0]) == 0)
+                                   else self.request.GET.getlist("header"),
+            favourite__in=all_favourites if not self.request.GET.getlist("favourite")
+                                         else self.request.GET.getlist("favourite"),
+            created_date__gte='1900-01-01' if (not self.request.GET.getlist("created_date")
+                                               or len(self.request.GET.getlist("created_date")[0]) == 0)
+                                           else self.request.GET.getlist("created_date")[0]
+        ).order_by('-created_date')
+
+        return queryset
 
 
 def show_note(request, note_id):
@@ -102,17 +133,3 @@ def delete_note(request, note_id):
         currow = get_object_or_404(Note, id=note_id)
         currow.delete()
     return redirect('')
-
-"""
-class AddNote(LoginRequiredMixin, DataMixin, CreateView):
-    form_class = AddNoteForm
-    template_name = 'tags/addnote.html'
-    success_url = reverse_lazy('')
-    login_url = reverse_lazy('')
-    raise_exception = True
-
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
-        c_def = self.get_user_context(title="Добавление заметки")
-        return dict(list(context.items()) + list(c_def.items()))
-"""

@@ -7,6 +7,7 @@ urlpatterns = [
     path('addnote/', add_note, name='addnote'),
     path('editnote/<int:note_id>/', edit_note, name='editnote'),
     path('deletenote/<int:note_id>', delete_note, name='deletenote'),
+    path('filter/', NoteFilter.as_view(), name='filter'),
     path('login/', LoginUser.as_view(), name='login'),
     path('logout/', logout_user, name='logout'),
     path('register/', RegisterUser.as_view(), name='register'),

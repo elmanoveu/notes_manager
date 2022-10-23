@@ -10,6 +10,20 @@
 </div>
 <div class="notes_list">
     {% if request.user.is_authenticated %}
+        <form action="{% url 'filter' %}" method="get" name="filter">
+            <h5>Название статьи:</h5>
+            <input type="text" class="checked" name="header"><br>
+            <h5>Дата создания после:</h5>
+            <input type="date" class="checked" name="created_date"><br>
+            <h5>Категории:</h5>
+            {%for cat in view.get_categories %}
+            <input type="checkbox" class="checked" name="category" value={{ cat.id }}>
+                <span>{{ cat.name }}</span>
+            {% endfor %} <br><br>
+            <input type="checkbox" class="checked" name="favourite" value=True>
+                <span>Только с пометкой "Избранное"</span><br><br>
+            <button type="submit">Применить фильтр</button>
+        </form><br>
         <a class="add_note" href="{% url 'addnote' %}" target="_blank">Добавить заметку</a><br><br>
         {% for n in notes %}
             <a class="name">{{n.header}}</a>
