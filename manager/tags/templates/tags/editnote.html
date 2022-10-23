@@ -2,6 +2,7 @@
 
 {% block content %}
     <h1>{{title}}</h1>
+    <a class="back" href="/">назад</a>
     <form action="{% url 'editnote' note_id=n.id %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
 
@@ -14,5 +15,10 @@
 
 
     <button type="submit">Применить изменения</button>
+    <button type="reset">Отменить изменения</button>
 </form>
+<br>
+<div class="deletenote">
+    <a href="{% url 'deletenote' note_id=n.id %}">Удалить заметку</a>
+</div>
 {% endblock %}

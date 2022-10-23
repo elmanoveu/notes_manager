@@ -15,7 +15,6 @@
             <a class="name">{{n.header}}</a>
             <a class="show" href="{{ n.get_absolute_url }}" target="_blank">Просмотреть</a>
             <a class="edit" href="{{ n.get_edit_url }}" target="_blank">Редактировать</a>
-            <a class="delete" href="/">Удалить</a>
             <p>{{n.content|truncatewords:15}}</p>
             <hr>
         {% endfor %}

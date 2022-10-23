@@ -97,6 +97,12 @@ def edit_note(request, note_id):
     return render(request, 'tags/editnote.html', {'form': form, 'n': currow, 'title': 'Редактирование заметки'})
 
 
+def delete_note(request, note_id):
+    if request.method == "GET":
+        currow = get_object_or_404(Note, id=note_id)
+        currow.delete()
+    return redirect('')
+
 """
 class AddNote(LoginRequiredMixin, DataMixin, CreateView):
     form_class = AddNoteForm
