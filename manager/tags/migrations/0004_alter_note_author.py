@@ -6,13 +6,21 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('tags', '0003_note_author'),
+        ("tags", "0003_note_author"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='note',
-            name='author',
-            field=models.CharField(choices=[('Ссылка', 'Ссылка'), ('Заметка', 'Заметка'), ('Памятка', 'Памятка'), ('TODO', 'TODO')], max_length=255),
+            model_name="note",
+            name="author",
+            field=models.CharField(
+                choices=[
+                    ("Ссылка", "Ссылка"),
+                    ("Заметка", "Заметка"),
+                    ("Памятка", "Памятка"),
+                    ("TODO", "TODO"),
+                ],
+                max_length=255,
+            ),
         ),
     ]

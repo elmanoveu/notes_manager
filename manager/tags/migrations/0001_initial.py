@@ -8,31 +8,66 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Category',
+            name="Category",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(choices=[('Ссылка', 'Ссылка'), ('Заметка', 'Заметка'), ('Памятка', 'Памятка'), ('TODO', 'TODO')], max_length=255, verbose_name='Категория')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "name",
+                    models.CharField(
+                        choices=[
+                            ("Ссылка", "Ссылка"),
+                            ("Заметка", "Заметка"),
+                            ("Памятка", "Памятка"),
+                            ("TODO", "TODO"),
+                        ],
+                        max_length=255,
+                        verbose_name="Категория",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Note',
+            name="Note",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('header', models.CharField(max_length=255, verbose_name='Заголовок')),
-                ('content', models.TextField(blank=True, verbose_name='Текст')),
-                ('created_date', models.DateTimeField(auto_now_add=True)),
-                ('favourite', models.BooleanField(default=False, verbose_name='Избранное')),
-                ('author', models.CharField(default='', max_length=255)),
-                ('category', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='tags.category')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("header", models.CharField(max_length=255, verbose_name="Заголовок")),
+                ("content", models.TextField(blank=True, verbose_name="Текст")),
+                ("created_date", models.DateTimeField(auto_now_add=True)),
+                (
+                    "favourite",
+                    models.BooleanField(default=False, verbose_name="Избранное"),
+                ),
+                ("author", models.CharField(default="", max_length=255)),
+                (
+                    "category",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT, to="tags.category"
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Заметки',
-                'verbose_name_plural': 'Заметки',
+                "verbose_name": "Заметки",
+                "verbose_name_plural": "Заметки",
             },
         ),
     ]
